@@ -1,0 +1,22 @@
+{
+  "name": "moviesapi",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OlenkaVoitsekhivska/moviesAPI.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/OlenkaVoitsekhivska/moviesAPI/issues"
+  },
+  "homepage": "https://github.com/OlenkaVoitsekhivska/moviesAPI#readme",
+  "dependencies": {
+    "basiclightbox": "^5.0.4"
+  }
+}
