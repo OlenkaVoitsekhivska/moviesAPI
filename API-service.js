@@ -17,7 +17,8 @@ export class API_service{
             params: {
             api_key: API_KEY 
             }});
-      this.page++;
+      // this.page++;
+      console.log(data)
       return data;
       } catch (error) {
       console.log(error);

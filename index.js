@@ -8,7 +8,7 @@ const list = document.querySelector('.list');
 const showMoreBtn = document.querySelector('.show-more-btn');
 const api_service = new API_service();
 const icon = document.querySelector('.fas')
-
+const switchDayNight = document.querySelector('.day-night-switch');
 //GENRES!!!!!!!!!
 const {genres} = JSON.parse('{"genres":[{"id":28,"name":"Action"},{"id":12,"name":"Adventure"},{"id":16,"name":"Animation"},{"id":35,"name":"Comedy"},{"id":80,"name":"Crime"},{"id":99,"name":"Documentary"},{"id":18,"name":"Drama"},{"id":10751,"name":"Family"},{"id":14,"name":"Fantasy"},{"id":36,"name":"History"},{"id":27,"name":"Horror"},{"id":10402,"name":"Music"},{"id":9648,"name":"Mystery"},{"id":10749,"name":"Romance"},{"id":878,"name":"Science Fiction"},{"id":10770,"name":"TV Movie"},{"id":53,"name":"Thriller"},{"id":10752,"name":"War"},{"id":37,"name":"Western"}]}');
 const genrePairs = {};
@@ -19,9 +19,10 @@ genres.map(el=>{
 
 function makeGenreArray(arry){
 
-    return arry.map(sth=>{
-        console.log(genrePairs[sth]);
-        return genrePairs[sth]? genrePairs[sth]:"undefined"
+ return arry.map(sth=>{
+    
+       return genrePairs[sth]? genrePairs[sth]:"undefined"
+        // return genrePairs[sth]
       })
     
     }
@@ -44,9 +45,9 @@ function markup(data) {
         }
         if (!el.release_date) {
 //  console.log(el.genre_ids)
-        return `<li ><p id = "movie_id">${el.id}</p><img src = "${picDirectory}"><p>${el.original_title}</p><p>${makeGenreArray(el.genre_ids)}</p><p>release date unknown</p><p>${el.vote_average}</p></li>`;
+        return `<li ><p id = "movie_id">${el.id}</p><img src = "${picDirectory}"><p class="movie_title">${el.original_title}</p><p>${makeGenreArray(el.genre_ids)}</p><p>release date unknown</p><p>${el.vote_average}</p></li>`;
         }
-        return `<li ><p id = "movie_id">${el.id}</p><img src = "${picDirectory}"><p>${el.original_title}</p><p>${makeGenreArray(el.genre_ids)}</p><p>${el.release_date.slice(0,4)}</p><p>${el.vote_average}</p></li>`;
+        return `<li ><p id = "movie_id">${el.id}</p><img src = "${picDirectory}"><p class="movie_title">${el.original_title}</p><p>${makeGenreArray(el.genre_ids)}</p><p>${el.release_date.slice(0,4)}</p><p>${el.vote_average}</p></li>`;
 
     }).join('');
     
@@ -142,36 +143,49 @@ pagination.on('afterMove', (event) => {
 
 }
 
-    
+  //DAY-NIGHT SWITCH 
+  
+  
+if (localStorage.getItem('darkMode')===null){
+    localStorage.setItem('darkMode', "false");
+}
+checkDarkModeStatus();
 
-// instance.getCurrentPage();
-
-const switchBtn = document.querySelector('.day-night-switch');
-switchBtn.addEventListener('change',()=>{
-    // console.log(switchBtn.checked)
-    if(switchBtn.checked){
-        document.querySelector("body").style.background="#262626";
-    
-        document.querySelector("body").style.color="#ff5500";
-        icon.classList.remove('fas', 'fa-sun')
-        icon.classList.add('fa-solid', 'fa-moon')
+function checkDarkModeStatus(){
+    if (localStorage.getItem("darkMode")==='true'){
+        addDarkTheme();
+        switchDayNight.checked = true;
     }else{
-        document.querySelector("body").style.background="white";
-        document.querySelector("body").style.color="#000";
-      
-        icon.classList.remove('fa-solid', 'fa-moon');
-        icon.classList.add('fas', 'fa-sun')
+        removeDarkTheme();
+        switchDayNight.checked = false;
     }
-   
+}
+
+
+
+switchDayNight.addEventListener('change', ()=>{
+if(switchDayNight.checked){
+addDarkTheme()
+    
+}else{
+removeDarkTheme()
+}
+  localStorage.setItem("darkMode",switchDayNight.checked);
 })
 
-
-
-// function makeGenreArray(arry){
-
-// return arry.map(sth=>{
-//     console.log(genrePairs[sth]);
-//     return genrePairs[sth];  
-//   })
-
-// }
+function addDarkTheme(){
+    document.body.classList.add('dark-theme');
+    icon.classList.remove('fas', 'fa-sun')
+    icon.classList.add('fa-solid', 'fa-moon', 'icon_dark');
+    if(document.body.style.color="black"){
+        document.body.style.color="white"
+    }
+}
+function removeDarkTheme(){
+    document.body.classList.remove('dark-theme');
+    icon.classList.remove('fa-solid', 'fa-moon','icon_dark' );
+    icon.classList.add('fas', 'fa-sun');
+    if(document.body.style.color="white"){
+        document.body.style.color="black"
+    }
+}
