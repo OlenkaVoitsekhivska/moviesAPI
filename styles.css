@@ -132,13 +132,18 @@ body.dark-theme{
 .movie_title{
   color:#ff5500;
 }
-body.dark-theme header,footer{
+body.dark-theme header{
   box-shadow: 0px 1px 58px 12px rgba(255,85,0,0.7),
             1px 2px 4px 0px rgba(255,85,0,0.7),
             2px 4px 8px 0px rgba(255,85,0,0.7),
             2px 4px 16px 0px rgba(255,85,0,0.7);
 }
-
+body.dark-theme footer{
+  box-shadow: 0px 1px 58px 12px rgba(255,85,0,0.7),
+  1px 2px 4px 0px rgba(255,85,0,0.7),
+  2px 4px 8px 0px rgba(255,85,0,0.7),
+  2px 4px 16px 0px rgba(255,85,0,0.7);
+}
 header,footer{
   height: 200px;
 }
